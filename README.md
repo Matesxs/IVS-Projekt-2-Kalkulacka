@@ -22,6 +22,9 @@ pip install -r requirements.txt or make init
 ### Makefile endpoints
 ```
 init - install packages from requirements.txt for developement
+doc - generate doxygen code documentation
+test - run tests on app
+test_with_coverage - run tests on app with test code coverage
 ```
 
 ## Tools
