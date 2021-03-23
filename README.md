@@ -21,6 +21,7 @@ pip install -r requirements.txt or make init
 
 ### Makefile endpoints
 ```
+init - install packages from requirements.txt for developement
 ```
 
 ## Tools

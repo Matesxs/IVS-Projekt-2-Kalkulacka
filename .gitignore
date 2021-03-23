@@ -31,3 +31,15 @@
 #Debug files
 *.debug
 *.log
+
+*.spec
+build/
+.idea/
+venv/
+dist/
+__pycache__/
+*.zip
+*.rar
+docs/
+.coverage
+install/
