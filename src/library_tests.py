@@ -3,14 +3,137 @@
 #
 
 import unittest
+import math
 from mathLib import MathFunctions
 
 ##
 # @brief Test mathematic operations of math library
 #
 class MathLibTestBasicFunctions(unittest.TestCase):
-  pass
-
+    def add_tests(self): #add function tests
+        self.assertEqual(MathFunctions.add_operations(0, 1), 1)
+        self.assertEqual(MathFunctions.add_operations(0, 0), 0)
+        self.assertEqual(MathFunctions.add_operations(1, 0), 1)
+        self.assertEqual(MathFunctions.add_operations(0, -1), -1)
+        self.assertEqual(MathFunctions.add_operations(-1, 0), -1)
+        self.assertEqual(MathFunctions.add_operations(1.5, 2.3), 3.8)
+        self.assertEqual(MathFunctions.add_operations(100000, 900000), 1000000)
+    def sub_tests(self): #subtraction function tests
+        self.assertEqual(MathFunctions.sub_operations(1, 1), 0)
+        self.assertEqual(MathFunctions.sub_operations(0, 1), -1)
+        self.assertEqual(MathFunctions.sub_operations(1, 0), 1)
+        self.assertEqual(MathFunctions.sub_operations(5.5, 4.3), 1.2)
+        self.assertEqual(MathFunctions.sub_operations(-1, 1), -2)
+        self.assertEqual(MathFunctions.sub_operations(5, -6), 11)
+        self.assertEqual(MathFunctions.sub_operations(-5.3, -4.1), -1.2)
+        self.assertEqual(MathFunctions.sub_operations(100, 5000000), -4999900)
+    def mul_tests(self): #multiplication function tests
+        self.assertEqual(MathFunctions.multiply_operation(1, 1), 1)
+        self.assertEqual(MathFunctions.multiply_operation(1, 0), 0)
+        self.assertEqual(MathFunctions.multiply_operation(0, 1), 0)
+        self.assertEqual(MathFunctions.multiply_operation(5.3, 5), 26.5)
+        self.assertEqual(MathFunctions.multiply_operation(1.2, 2.3), 2.76)
+        self.assertEqual(MathFunctions.multiply_operation(12.345, 6.789), 83.810205)
+        self.assertEqual(MathFunctions.multiply_operation(-5, 3), -15)
+        self.assertEqual(MathFunctions.multiply_operation(-70, -33), 2310)
+        self.assertEqual(MathFunctions.multiply_operation(-1450.1444, 789444784.8875), -1144808933913.812755)
+    def div_tests(self): #division function tests
+        self.assertEqual(MathFunctions.divide_operation(1, 1), 1)
+        self.assertEqual(MathFunctions.divide_operation(0, 1), 1)
+        self.assertEqual(MathFunctions.divide_operation(5, 5), 1)
+        self.assertEqual(MathFunctions.divide_operation(10, 2), 5)
+        self.assertEqual(MathFunctions.divide_operation(333, 111), 3)
+        self.assertEqual(MathFunctions.divide_operation(15, 2), 7.5)
+        self.assertEqual(MathFunctions.divide_operation(25, 4), 6.25)
+        self.assertAlmostEqual(MathFunctions.divide_operation(159, 753), 0.21115537848, 10)
+        self.assertAlmostEqual(MathFunctions.divide_operation(753, -159), -4.73584905660, 10)
+    def div_by_zero_tests(self): #testing if division by 0 raises error
+        with self.assertRaises(ZeroDivisionError):
+            MathFunctions.divide_operation(0, 0)
+        with self.assertRaises(ZeroDivisionError):
+            MathFunctions.divide_operation(5, 0)
+        with self.assertRaises(ZeroDivisionError):
+            MathFunctions.divide_operation(-5, 0)
+        with self.assertRaises(ZeroDivisionError):
+            MathFunctions.divide_operation(-485.33, 0)
+    def pow_tests(self): #power function tests
+        self.assertEqual(MathFunctions.power_operation(1, 1), 1)
+        self.assertEqual(MathFunctions.power_operation(0, 10), 0)
+        self.assertEqual(MathFunctions.power_operation(10, 0), 1)
+        self.assertEqual(MathFunctions.power_operation(0, 0), 1)
+        self.assertEqual(MathFunctions.power_operation(2, 2), 4)
+        self.assertEqual(MathFunctions.power_operation(2, 10), 1024)
+        self.assertEqual(MathFunctions.power_operation(5, 3), 125)
+        self.assertEqual(MathFunctions.power_operation(50, -2), 0.0004)
+        self.assertEqual(MathFunctions.power_operation(50, 10), 97656250000000000)
+        self.assertEqual(MathFunctions.power_operation(-5, 8), -390625)
+        self.assertAlmostEqual(MathFunctions.power_operation(-80, -8), -0.000000000000000596046, 20)
+    def root_tests(self): #root function tests
+        self.assertEqual(MathFunctions.root_operation(1, 1), 1)
+        self.assertEqual(MathFunctions.root_operation(1, 5), 5)
+        self.assertAlmostEqual(MathFunctions.root_operation(10, 5), 1.17461894308, 10)
+        self.assertAlmostEqual(MathFunctions.root_operation(-5, 10), 0.63095734448, 10)
+        self.assertAlmostEqual(MathFunctions.root_operation(16, 2), 1.04427378242, 10)
+        self.assertAlmostEqual(MathFunctions.root_operation(12.5, 3), 1.00882763407, 10)
+        self.assertAlmostEqual(MathFunctions.root_operation(1.2, 3.4), 2.77267583598, 10)
+        self.assertAlmostEqual(MathFunctions.root_operation(-5.6, 7.8), 0.69294280921, 10)
+    def root_of_neg_number_tests(self): #testing if root of negative numbers raises error
+        with self.assertRaises(RuntimeError):
+            MathFunctions.root_operation(2, -5)
+        with self.assertRaises(RuntimeError):
+            MathFunctions.root_operation(2, -5.5)
+        with self.assertRaises(RuntimeError):
+            MathFunctions.root_operation(-4, -10)
+        with self.assertRaises(RuntimeError):
+            MathFunctions.root_operation(-8.3, -5.778)
+    def zeroth_root_tests(self): #testing if 0th root raises error
+        with self.assertRaises(RuntimeError):
+            MathFunctions.root_operation(0, 1)
+        with self.assertRaises(RuntimeError):
+            MathFunctions.root_operation(0, 5)
+        with self.assertRaises(RuntimeError):
+            MathFunctions.root_operation(0, 55.5)
+    def log_tests(self): #natural logarithm function tests
+        self.assertEqual(MathFunctions.natural_log_operation(1), 0)
+        self.assertAlmostEqual(MathFunctions.natural_log_operation(2), 0.30102999566, 10)
+        self.assertAlmostEqual(MathFunctions.natural_log_operation(3.4), 0.53147891704, 10)
+        self.assertEqual(MathFunctions.natural_log_operation(100), 2)
+        self.assertAlmostEqual(MathFunctions.natural_log_operation(100100100100), 11.00043451177, 10)
+    def zero_log_tests(self): #testing if natural logarithm of 0 raises error
+        with self.assertRaises(RuntimeError):
+            MathFunctions.natural_log_operation(0)
+    def neg_log_tests(self): #testing if natural logarithm of negative numbers raises error
+        with self.assertRaises(RuntimeError):
+            MathFunctions.natural_log_operation(-1)
+        with self.assertRaises(RuntimeError):
+            MathFunctions.natural_log_operation(-13)
+        with self.assertRaises(RuntimeError):
+            MathFunctions.natural_log_operation(-45.44)
+    def fac_tests(self): #factorial function tests
+        self.assertEqual(MathFunctions.factorial_operation(0), 1)
+        self.assertEqual(MathFunctions.factorial_operation(1), 1)
+        self.assertEqual(MathFunctions.factorial_operation(5), 120)
+        self.assertEqual(MathFunctions.factorial_operation(10), 3628800)
+    def non_intiger_fac_tests(self): #testing if factorial of non intiger numbers (float, double) raises error
+        with self.assertRaises(RuntimeError):
+            MathFunctions.factorial_operation(1.1)
+        with self.assertRaises(RuntimeError):
+            MathFunctions.factorial_operation(5.7)
+        with self.assertRaises(RuntimeError):
+            MathFunctions.factorial_operation(435.854)
+    def neg_number_fac_tests(self): #testing if factorial of negative numbers raises error
+        with self.assertRaises(RuntimeError):
+            MathFunctions.factorial_operation(-1)
+        with self.assertRaises(RuntimeError):
+            MathFunctions.factorial_operation(-5)
+        with self.assertRaises(RuntimeError):
+            MathFunctions.factorial_operation(-8.3)
+    def inv_tests(self): #inversion function tests
+        self.assertEqual(MathFunctions.invert_operation(0), 0)
+        self.assertEqual(MathFunctions.invert_operation(1), -1)
+        self.assertEqual(MathFunctions.invert_operation(-1), 1)
+        self.assertEqual(MathFunctions.invert_operation(50), -50)
+        self.assertEqual(MathFunctions.invert_operation(-100.25), 100.25)
 if __name__ == '__main__':
   try:
     unittest.main()
