@@ -4,7 +4,7 @@
 
 import unittest
 import math
-from mathLib import MathFunctions
+from mathLib import MathFunctions, Interpreter, Parser, Tokenizer
 
 
 ##
