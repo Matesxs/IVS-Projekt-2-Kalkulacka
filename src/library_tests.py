@@ -159,6 +159,29 @@ class MathLibTestBasicFunctions(unittest.TestCase):
     self.assertEqual(MathFunctions.abs_operation(-1.5), 1.5)
     self.assertEqual(MathFunctions.abs_operation(-50.485), 50.485)
 
+##
+# @brief Testing Tokenizer class of math library
+#
+class MathLibTestTokenizer(unittest.TestCase):
+  pass
+
+##
+# @brief Testing Parser class of math library
+#
+class MathLibTestParser(unittest.TestCase):
+  pass
+
+##
+# @brief Testing Interpreter class of math library
+#
+class MathLibTestInterpreter(unittest.TestCase):
+  pass
+
+##
+# @brief Testing entrypoint for UI
+#
+class MathLibTestExpressions(unittest.TestCase):
+  pass
 
 if __name__ == '__main__':
   try:
