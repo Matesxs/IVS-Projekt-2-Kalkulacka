@@ -43,7 +43,7 @@ class MathLibTestBasicFunctions(unittest.TestCase):
 
   def test_div(self):  # division function tests
     self.assertEqual(MathFunctions.divide_operation(1, 1), 1)
-    self.assertEqual(MathFunctions.divide_operation(0, 1), 1)
+    self.assertEqual(MathFunctions.divide_operation(0, 1), 0)
     self.assertEqual(MathFunctions.divide_operation(5, 5), 1)
     self.assertEqual(MathFunctions.divide_operation(10, 2), 5)
     self.assertEqual(MathFunctions.divide_operation(333, 111), 3)
@@ -72,8 +72,8 @@ class MathLibTestBasicFunctions(unittest.TestCase):
     self.assertEqual(MathFunctions.power_operation(5, 3), 125)
     self.assertEqual(MathFunctions.power_operation(50, -2), 0.0004)
     self.assertEqual(MathFunctions.power_operation(50, 10), 97656250000000000)
-    self.assertEqual(MathFunctions.power_operation(-5, 8), -390625)
-    self.assertAlmostEqual(MathFunctions.power_operation(-80, -8), -0.000000000000000596046, 20)
+    self.assertEqual(MathFunctions.power_operation(-5, 8), 390625)
+    self.assertAlmostEqual(MathFunctions.power_operation(-80, -8), 0.000000000000000596046, 20)
 
   def test_root(self):  # root function tests
     self.assertEqual(MathFunctions.root_operation(1, 1), 1)
@@ -81,7 +81,7 @@ class MathLibTestBasicFunctions(unittest.TestCase):
     self.assertAlmostEqual(MathFunctions.root_operation(10, 5), 1.17461894308, 10)
     self.assertAlmostEqual(MathFunctions.root_operation(-5, 10), 0.63095734448, 10)
     self.assertAlmostEqual(MathFunctions.root_operation(16, 2), 1.04427378242, 10)
-    self.assertAlmostEqual(MathFunctions.root_operation(12.5, 3), 1.00882763407, 10)
+    self.assertAlmostEqual(MathFunctions.root_operation(12.5, 3), 1.09186689961, 10)
     self.assertAlmostEqual(MathFunctions.root_operation(1.2, 3.4), 2.77267583598, 10)
     self.assertAlmostEqual(MathFunctions.root_operation(-5.6, 7.8), 0.69294280921, 10)
 
@@ -105,10 +105,10 @@ class MathLibTestBasicFunctions(unittest.TestCase):
 
   def test_log(self):  # natural logarithm function tests
     self.assertEqual(MathFunctions.natural_log_operation(1), 0)
-    self.assertAlmostEqual(MathFunctions.natural_log_operation(2), 0.30102999566, 10)
-    self.assertAlmostEqual(MathFunctions.natural_log_operation(3.4), 0.53147891704, 10)
-    self.assertEqual(MathFunctions.natural_log_operation(100), 2)
-    self.assertAlmostEqual(MathFunctions.natural_log_operation(100100100100), 11.00043451177, 10)
+    self.assertAlmostEqual(MathFunctions.natural_log_operation(2), 0.69314718056, 10)
+    self.assertAlmostEqual(MathFunctions.natural_log_operation(3.4), 1.22377543162, 10)
+    self.assertAlmostEqual(MathFunctions.natural_log_operation(100), 4.60517018599, 10)
+    self.assertAlmostEqual(MathFunctions.natural_log_operation(100100100100), 25.3294365233, 10)
 
   def test_zero_log(self):  # testing if natural logarithm of 0 raises error
     with self.assertRaises(RuntimeError):
@@ -150,6 +150,14 @@ class MathLibTestBasicFunctions(unittest.TestCase):
     self.assertEqual(MathFunctions.invert_operation(-1), 1)
     self.assertEqual(MathFunctions.invert_operation(50), -50)
     self.assertEqual(MathFunctions.invert_operation(-100.25), 100.25)
+
+  def test_abs(self): # absolute value function tests
+    self.assertEqual(MathFunctions.abs_operation(0), 0)
+    self.assertEqual(MathFunctions.abs_operation(1), 1)
+    self.assertEqual(MathFunctions.abs_operation(1.5), 1.5)
+    self.assertEqual(MathFunctions.abs_operation(-1), 1)
+    self.assertEqual(MathFunctions.abs_operation(-1.5), 1.5)
+    self.assertEqual(MathFunctions.abs_operation(-50.485), 50.485)
 
 
 if __name__ == '__main__':
