@@ -10,40 +10,69 @@ import math
 class MathFunctions:
   @staticmethod
   def add_operation(num1, num2):
-    pass
+    return num1 + num2
 
   @staticmethod
   def sub_operation(num1, num2):
-    pass
+    return num1 - num2
 
   @staticmethod
   def multiply_operation(num1, num2):
-    pass
+    return num1 * num2
 
   @staticmethod
   def divide_operation(num1, num2):
-    pass
+    if num2 == 0:
+      raise ZeroDivisionError("Can not divide by zero")
+    return num1 / num2
 
   @staticmethod
   def power_operation(num1, num2):
-    pass
+    if num1 < 0 and int(num2) != num2:
+      raise RuntimeError("Negative number can not be raised to the power of floating point number")
+    else:
+      return num1 ** num2
 
   @staticmethod
-  def root_operation(n, value):
-    pass
+  def root_operation(n, value): #xxxxx
+    if n == 0:
+      raise RuntimeError("0th root is not defined")
+    elif value < 0:
+      raise RuntimeError("Can not do root of negative number")
+    else:
+      return value ** (1 / n)
 
   @staticmethod
   def invert_operation(num):
-    pass
+    return -num
 
   @staticmethod
   def factorial_operation(num):
-    pass
+    factorial = 1
+    if num != int(num):
+      raise RuntimeError("Factorial is not defined for floating point numbers")
+    elif num < 0:
+      raise RuntimeError("Factorial is not defined for negative numbers")
+    elif num == 0:
+      return 1
+    #else:
+    #  return num * factorial_operation(num - 1)
+    else:
+      for i in range(num):
+        factorial *= (i + 1)
+      return factorial
+
 
   @staticmethod
   def natural_log_operation(num):
-    pass
+    if num <= 0:
+      raise RuntimeError("Logarithm is defined for positive numbers only")
+    else:
+      return math.log(num)
 
   @staticmethod
   def abs_operation(num):
-    pass
+    if num < 0:
+      return -num
+    else:
+      return num
