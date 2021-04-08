@@ -10,3 +10,6 @@ test:
 test_with_coverage:
 	-coverage run library_tests.py
 	coverage report -m
+
+clean:
+	@del .coverage
