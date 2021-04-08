@@ -7,9 +7,9 @@ DEADLINE: 30. 4. 2021
 
 Termíny:
 1)	Repozitář, requirements.txt                                 20.3.2021       Done in time
-2)	Testy mat operací, základ makefile                          1.4.2021
-3)  Matematické oprace                                          2.4.2021
-4)  Kontrola a korekce testů mat operací                        2.4.2021
+2)	Testy mat operací, základ makefile                          1.4.2021        Done
+3)  Matematické oprace                                          2.4.2021        Done
+4)  Kontrola a korekce testů mat operací                        2.4.2021        Done
 5)  Testy tokenizeru                                            5.4.2021
 6)  Tokenizer                                                   8.4.2021
 7)  Testy parseru                                               12.4.2021
