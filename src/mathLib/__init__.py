@@ -3,3 +3,4 @@ from .tokenizer import Tokenizer
 from .prsr import Parser
 from .interpreter import Interpreter
 from .basics import nodes
+from .basics.tokens import TokenType, Token
