@@ -163,7 +163,169 @@ class MathLibTestBasicFunctions(unittest.TestCase):
 # @brief Testing Tokenizer class of math library
 #
 class MathLibTestTokenizer(unittest.TestCase):
-  pass
+  
+  ##
+  # @brief Test empty expression
+  #
+  def test_empty(self):
+    self.assertEqual(Tokenizer("").tokenize(), [])
+    self.assertEqual(Tokenizer("   ").tokenize(), [])
+    self.assertEqual(Tokenizer("\n\n\n").tokenize(), [])
+    self.assertEqual(Tokenizer("\t\t\t").tokenize(), [])
+    self.assertEqual(Tokenizer(" \n\t  \n \t\n  \n\t\n  ").tokenize(), [])
+  
+  ##
+  # @brief Test numbers
+  #
+  def test_numbers(self):
+    self.assertEqual(Tokenizer("12345").tokenize(), [Token(TokenType.NUMBER, 12345)])
+    self.assertEqual(Tokenizer("67890").tokenize(), [Token(TokenType.NUMBER, 67890)])
+    self.assertEqual(Tokenizer(".").tokenize(), [Token(TokenType.NUMBER, 0.0)])
+    self.assertEqual(Tokenizer("9.").tokenize(), [Token(TokenType.NUMBER, 9.0)])
+    self.assertEqual(Tokenizer(".9").tokenize(), [Token(TokenType.NUMBER, 0.9)])
+    self.assertEqual(Tokenizer("135.097").tokenize(), [Token(TokenType.NUMBER, 135.097)])
+    self.assertEqual(Tokenizer("1 2.3 .4 5. 67.89").tokenize(), [
+      Token(TokenType.NUMBER, 1),
+      Token(TokenType.NUMBER, 2.3),
+      Token(TokenType.NUMBER, 0.4),
+      Token(TokenType.NUMBER, 5.0),
+      Token(TokenType.NUMBER, 67.89)
+    ])
+  
+  ##
+  # @brief Test operators
+  #
+  def test_operators(self):
+    self.assertEqual(Tokenizer("+").tokenize(), [Token(TokenType.PLUS)])
+    self.assertEqual(Tokenizer("-").tokenize(), [Token(TokenType.MINUS)])
+    self.assertEqual(Tokenizer("*").tokenize(), [Token(TokenType.MULTIPLY)])
+    self.assertEqual(Tokenizer("/").tokenize(), [Token(TokenType.DIVIDE)])
+    self.assertEqual(Tokenizer("^").tokenize(), [Token(TokenType.POW)])
+    self.assertEqual(Tokenizer("√").tokenize(), [Token(TokenType.ROOT)])
+    self.assertEqual(Tokenizer("+ */^ -").tokenize(), [
+      Token(TokenType.PLUS),
+      Token(TokenType.MULTIPLY),
+      Token(TokenType.DIVIDE),
+      Token(TokenType.POW),
+      Token(TokenType.MINUS)
+    ])
+  
+  ##
+  # @brief Test brackets
+  #
+  def test_brackets(self):
+    self.assertEqual(Tokenizer("(").tokenize(), [Token(TokenType.LPAREN)])
+    self.assertEqual(Tokenizer(")").tokenize(), [Token(TokenType.RPAREN)])
+    self.assertEqual(Tokenizer("()").tokenize(), [
+      Token(TokenType.LPAREN),
+      Token(TokenType.RPAREN)
+    ])
+    self.assertEqual(Tokenizer(")(())(").tokenize(), [
+      Token(TokenType.RPAREN),
+      Token(TokenType.LPAREN),
+      Token(TokenType.LPAREN),
+      Token(TokenType.RPAREN),
+      Token(TokenType.RPAREN),
+      Token(TokenType.LPAREN)
+    ])
+  
+  ##
+  # @brief Test keywords
+  #
+  def test_keywords(self):
+    self.assertEqual(Tokenizer("e").tokenize(), [Token(TokenType.KEYWORD, e)])
+    self.assertEqual(Tokenizer("abs").tokenize(), [Token(TokenType.KEYWORD, abs)])
+    self.assertEqual(Tokenizer("ln").tokenize(), [Token(TokenType.KEYWORD, ln)])
+    self.assertEqual(Tokenizer("fact").tokenize(), [Token(TokenType.KEYWORD, fact)])
+    self.assertEqual(Tokenizer("rand").tokenize(), [Token(TokenType.KEYWORD, rand)])
+    self.assertEqual(Tokenizer("abs fact ln").tokenize(), [
+      Token(TokenType.KEYWORD, abs),
+      Token(TokenType.KEYWORD, fact),
+      Token(TokenType.KEYWORD, ln)
+    ])
+  
+  ##
+  # @brief Test combined expression
+  #
+  def test_combined_expression(self):
+    self.assertEqual(Tokenizer("abs( 10.01 ^(9/ 3)- 15\n*ln(e* e)) +rand*2.5\t +3√18- 654321 \n*fact(4.)+.15").tokenize(), [
+      Token(TokenType.KEYWORD, abs),
+      Token(TokenType.LPAREN),
+      Token(TokenType.NUMBER, 10.01),
+      Token(TokenType.POW),
+      Token(TokenType.LPAREN),
+      Token(TokenType.NUMBER, 9),
+      Token(TokenType.DIVIDE),
+      Token(TokenType.NUMBER, 3),
+      Token(TokenType.RPAREN),
+      Token(TokenType.MINUS),
+      Token(TokenType.NUMBER, 15),
+      Token(TokenType.MULTIPLY),
+      Token(TokenType.KEYWORD, ln),
+      Token(TokenType.LPAREN),
+      Token(TokenType.KEYWORD, e),
+      Token(TokenType.MULTIPLY),
+      Token(TokenType.KEYWORD, e),
+      Token(TokenType.RPAREN),
+      Token(TokenType.RPAREN),
+      Token(TokenType.PLUS),
+      Token(TokenType.KEYWORD, rand),
+      Token(TokenType.MULTIPLY),
+      Token(TokenType.NUMBER, 2.5),
+      Token(TokenType.PLUS),
+      Token(TokenType.NUMBER, 3),
+      Token(TokenType.ROOT),
+      Token(TokenType.NUMBER, 18),
+      Token(TokenType.MINUS),
+      Token(TokenType.NUMBER, 654321),
+      Token(TokenType.MULTIPLY),
+      Token(TokenType.KEYWORD, fact),
+      Token(TokenType.LPAREN),
+      Token(TokenType.NUMBER, 4.0),
+      Token(TokenType.RPAREN),
+      Token(TokenType.PLUS),
+      Token(TokenType.NUMBER, 0.15),
+    ])
+  
+  ##
+  # @brief Test multiple decimal dots
+  #
+  def test_multidecdots(self):
+    self.assertEqual(Tokenizer("...").tokenize(), [
+      Token(TokenType.NUMBER, 0.0),
+      Token(TokenType.NUMBER, 0.0),
+      Token(TokenType.NUMBER, 0.0)
+    ])
+  
+  ##
+  # @brief Test invalid characters
+  #
+  def test_invalid_char(self):
+    with self.assertRaises(SyntaxError):
+      Tokenizer(""",:;?!|%$@#'"´ˇ""").tokenize()
+    with self.assertRaises(SyntaxError):
+      Tokenizer("5+8'12#3*6!").tokenize()
+    with self.assertRaises(SyntaxError):
+      Tokenizer("0|1%2$3@4").tokenize()
+  
+  ##
+  # @brief Test invalid expressions
+  #
+  def test_invalid_expression(self):
+    with self.assertRaises(SyntaxError):
+      Tokenizer("abselnfactrand").tokenize()
+    with self.assertRaises(SyntaxError):
+      Tokenizer("sin(10)").tokenize()
+    with self.assertRaises(SyntaxError):
+      Tokenizer("cos(10)").tokenize()
+    with self.assertRaises(SyntaxError):
+      Tokenizer("tan(10)").tokenize()
+    with self.assertRaises(SyntaxError):
+      Tokenizer("ab(5) + factln(10) - erand").tokenize()
+    with self.assertRaises(SyntaxError):
+      Tokenizer("14 5 * 9 82 - abs( 7 10)").tokenize()
+    with self.assertRaises(SyntaxError):
+      Tokenizer("Hello world!").tokenize()
 
 ##
 # @brief Testing Parser class of math library
