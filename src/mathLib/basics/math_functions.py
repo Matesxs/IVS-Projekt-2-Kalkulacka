@@ -8,24 +8,40 @@ import math
 # @brief Holds all mathematic functions of library
 #
 class MathFunctions:
+  
+  ##
+  # @brief Addition
+  #
   @staticmethod
   def add_operation(num1, num2):
     return num1 + num2
 
+  ##
+  # @brief Subtraction
+  #
   @staticmethod
   def sub_operation(num1, num2):
     return num1 - num2
 
+  ##
+  # @brief Multiplication
+  #
   @staticmethod
   def multiply_operation(num1, num2):
     return num1 * num2
 
+  ##
+  # @brief Division
+  #
   @staticmethod
   def divide_operation(num1, num2):
     if num2 == 0:
       raise ZeroDivisionError("Can not divide by zero")
     return num1 / num2
 
+  ##
+  # @brief Power
+  #
   @staticmethod
   def power_operation(num1, num2):
     if num1 < 0 and int(num2) != num2:
@@ -33,8 +49,11 @@ class MathFunctions:
     else:
       return num1 ** num2
 
+  ##
+  # @brief Root
+  #
   @staticmethod
-  def root_operation(n, value): #xxxxx
+  def root_operation(n, value):
     if n == 0:
       raise RuntimeError("0th root is not defined")
     elif value < 0:
@@ -42,10 +61,16 @@ class MathFunctions:
     else:
       return value ** (1 / n)
 
+  ##
+  # @brief Invertion
+  #
   @staticmethod
   def invert_operation(num):
     return -num
 
+  ##
+  # @brief Factorial
+  #
   @staticmethod
   def factorial_operation(num):
     factorial = 1
@@ -62,7 +87,9 @@ class MathFunctions:
         factorial *= (i + 1)
       return factorial
 
-
+  ##
+  # @brief Natural logarithm
+  #
   @staticmethod
   def natural_log_operation(num):
     if num <= 0:
@@ -70,6 +97,9 @@ class MathFunctions:
     else:
       return math.log(num)
 
+  ##
+  # @brief Absolute value
+  #
   @staticmethod
   def abs_operation(num):
     if num < 0:
