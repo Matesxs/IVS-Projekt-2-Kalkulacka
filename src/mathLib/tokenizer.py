@@ -8,3 +8,6 @@
 class Tokenizer:
   def __init__(self, text_input:str):
     pass
+
+  def tokenize(self):
+    pass
