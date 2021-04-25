@@ -5,7 +5,7 @@
 import unittest
 import math
 from mathLib import MathFunctions, Interpreter, Parser, Tokenizer, Token, TokenType
-
+from mathLib.basics.nodes import *
 
 ##
 # @brief Test mathematic operations of math library
@@ -331,7 +331,243 @@ class MathLibTestTokenizer(unittest.TestCase):
 # @brief Testing Parser class of math library
 #
 class MathLibTestParser(unittest.TestCase):
-  pass
+  ##
+  # @brief Test empty list of tokens
+  #
+  def test_empty(self):
+    node_tree = Parser([]).parse()
+    self.assertEqual(node_tree, None)
+
+  ##
+  # @brief Test unknown tokens
+  #
+  def test_unknown_token(self):
+    with self.assertRaises(SyntaxError):
+      Parser([Token(TokenType.KEYWORD, "fafsafasfasfasfasfawsfwa")]).parse()
+
+    with self.assertRaises(SyntaxError):
+      Parser([Token(TokenType.KEYWORD, "randbla")]).parse()
+
+  ##
+  # @brief Test parsing numbers
+  #
+  def test_numbers(self):
+    self.assertEqual(Parser([Token(TokenType.NUMBER, 124.34)]).parse(), NumberNode(124.34))
+    self.assertEqual(Parser([Token(TokenType.NUMBER, 321)]).parse(), NumberNode(321))
+    self.assertEqual(Parser([Token(TokenType.NUMBER, 0)]).parse(), NumberNode(0))
+    self.assertEqual(Parser([Token(TokenType.NUMBER, -51.3)]).parse(), NumberNode(-51.3))
+    self.assertEqual(Parser([Token(TokenType.KEYWORD, "e")]).parse(), NumberNode(math.e))
+    self.assertIsInstance(Parser([Token(TokenType.KEYWORD, "rand")]).parse(), NumberNode)
+
+  ##
+  # @brief Test parsing binary operations
+  #
+  def test_binary_operations(self):
+    self.assertEqual(Parser([Token(TokenType.NUMBER, 25), Token(TokenType.PLUS), Token(TokenType.NUMBER, 50)]).parse(),
+                     BinaryOperationNode(NumberNode(25), Token(TokenType.PLUS), NumberNode(50)))
+    self.assertEqual(Parser([Token(TokenType.NUMBER, 25), Token(TokenType.MINUS), Token(TokenType.NUMBER, 50)]).parse(),
+                     BinaryOperationNode(NumberNode(25), Token(TokenType.MINUS), NumberNode(50)))
+    self.assertEqual(Parser([Token(TokenType.NUMBER, 25), Token(TokenType.MULTIPLY), Token(TokenType.NUMBER, 50)]).parse(),
+                     BinaryOperationNode(NumberNode(25), Token(TokenType.MULTIPLY), NumberNode(50)))
+    self.assertEqual(Parser([Token(TokenType.NUMBER, 25), Token(TokenType.DIVIDE), Token(TokenType.NUMBER, 50)]).parse(),
+                     BinaryOperationNode(NumberNode(25), Token(TokenType.DIVIDE), NumberNode(50)))
+    self.assertEqual(Parser([Token(TokenType.NUMBER, 25), Token(TokenType.POW), Token(TokenType.NUMBER, 50)]).parse(),
+                     BinaryOperationNode(NumberNode(25), Token(TokenType.POW), NumberNode(50)))
+    self.assertEqual(Parser([Token(TokenType.NUMBER, 25), Token(TokenType.ROOT), Token(TokenType.NUMBER, 50)]).parse(),
+                     BinaryOperationNode(NumberNode(25), Token(TokenType.ROOT), NumberNode(50)))
+    self.assertEqual(Parser([Token(TokenType.NUMBER, 25), Token(TokenType.DIVIDE), Token(TokenType.NUMBER, 50)]).parse(),
+                     BinaryOperationNode(NumberNode(25), Token(TokenType.DIVIDE), NumberNode(50)))
+
+  ##
+  # @brief Test parsing unary operations
+  #
+  def test_unary_operations(self):
+    self.assertEqual(Parser([Token(TokenType.PLUS), Token(TokenType.NUMBER, 11)]).parse(), UnaryOperationNode(Token(TokenType.PLUS), NumberNode(11)))
+    self.assertEqual(Parser([Token(TokenType.MINUS), Token(TokenType.NUMBER, 11)]).parse(), UnaryOperationNode(Token(TokenType.MINUS), NumberNode(11)))
+
+  ##
+  # @brief Test parsing keyword unary operations
+  #
+  def test_keyword_unary_operations(self):
+    self.assertEqual(Parser([Token(TokenType.KEYWORD, "abs"), Token(TokenType.NUMBER, 11)]).parse(), UnaryOperationNode(Token(TokenType.KEYWORD, "abs"), NumberNode(11)))
+    self.assertEqual(Parser([Token(TokenType.KEYWORD, "fact"), Token(TokenType.NUMBER, 11)]).parse(), UnaryOperationNode(Token(TokenType.KEYWORD, "fact"), NumberNode(11)))
+    self.assertEqual(Parser([Token(TokenType.KEYWORD, "ln"), Token(TokenType.NUMBER, 11)]).parse(), UnaryOperationNode(Token(TokenType.KEYWORD, "ln"), NumberNode(11)))
+
+  ##
+  # @brief Test parsing valid operations with parentecies
+  #
+  def test_valid_parents(self):
+    self.assertEqual(Parser([Token(TokenType.LPAREN), Token(TokenType.NUMBER, 25), Token(TokenType.PLUS), Token(TokenType.NUMBER, 50), Token(TokenType.RPAREN)]).parse(),
+                     BinaryOperationNode(NumberNode(25), Token(TokenType.PLUS), NumberNode(50)))
+
+    self.assertEqual(Parser([Token(TokenType.LPAREN), Token(TokenType.NUMBER, 25), Token(TokenType.PLUS), Token(TokenType.NUMBER, 50), Token(TokenType.RPAREN), Token(TokenType.PLUS), Token(TokenType.LPAREN), Token(TokenType.NUMBER, 25), Token(TokenType.PLUS), Token(TokenType.NUMBER, 50), Token(TokenType.RPAREN)]).parse(),
+                     BinaryOperationNode(BinaryOperationNode(NumberNode(25), Token(TokenType.PLUS), NumberNode(50)), Token(TokenType.PLUS), BinaryOperationNode(NumberNode(25), Token(TokenType.PLUS), NumberNode(50))))
+
+  ##
+  # @brief Test parsing invalid operations with parentecies
+  #
+  def test_invalid_parents(self):
+    with self.assertRaises(SyntaxError):
+      Parser([Token(TokenType.LPAREN), Token(TokenType.NUMBER, 25), Token(TokenType.PLUS), Token(TokenType.NUMBER, 50)]).parse()
+
+    with self.assertRaises(SyntaxError):
+      Parser([Token(TokenType.NUMBER, 25), Token(TokenType.PLUS), Token(TokenType.NUMBER, 50), Token(TokenType.RPAREN)]).parse()
+
+    with self.assertRaises(SyntaxError):
+      Parser([Token(TokenType.LPAREN), Token(TokenType.NUMBER, 25), Token(TokenType.PLUS), Token(TokenType.NUMBER, 50), Token(TokenType.RPAREN), Token(TokenType.RPAREN)]).parse()
+
+    with self.assertRaises(SyntaxError):
+      Parser([Token(TokenType.LPAREN), Token(TokenType.LPAREN), Token(TokenType.NUMBER, 25), Token(TokenType.PLUS), Token(TokenType.NUMBER, 50), Token(TokenType.RPAREN)]).parse()
+
+  ##
+  # @brief Test parsing complex operations and operations order
+  #
+  def test_operation_order(self):
+    # ---5
+    tokens = [
+      Token(TokenType.MINUS),
+      Token(TokenType.MINUS),
+      Token(TokenType.MINUS),
+      Token(TokenType.NUMBER, 5),
+    ]
+    self.assertEqual(str(Parser(tokens).parse()), "(MINUS, (MINUS, (MINUS, 5)))")
+
+    # -e^255 / (2 * ln 3 - 8) + 16
+    tokens = [
+      Token(TokenType.MINUS),
+      Token(TokenType.KEYWORD, "e"),
+      Token(TokenType.POW),
+      Token(TokenType.NUMBER, 255),
+      Token(TokenType.DIVIDE),
+      Token(TokenType.LPAREN),
+      Token(TokenType.NUMBER, 2),
+      Token(TokenType.MULTIPLY),
+      Token(TokenType.KEYWORD, "ln"),
+      Token(TokenType.NUMBER, 3),
+      Token(TokenType.MINUS),
+      Token(TokenType.NUMBER, 8),
+      Token(TokenType.RPAREN),
+      Token(TokenType.PLUS),
+      Token(TokenType.NUMBER, 16),
+    ]
+
+    self.assertEqual(str(Parser(tokens).parse()), "(((MINUS, (2.718281828459045, POW, 255)), DIVIDE, ((2, MULTIPLY, (LN, 3)), MINUS, 8)), PLUS, 16)")
+
+    # abs -15 + 30 * fact 2 * 3
+    tokens = [
+      Token(TokenType.KEYWORD, "abs"),
+      Token(TokenType.NUMBER, -15),
+      Token(TokenType.PLUS),
+      Token(TokenType.NUMBER, 30),
+      Token(TokenType.MULTIPLY),
+      Token(TokenType.KEYWORD, "fact"),
+      Token(TokenType.NUMBER, 2),
+      Token(TokenType.MULTIPLY),
+      Token(TokenType.NUMBER, 3),
+    ]
+
+    self.assertEqual(str(Parser(tokens).parse()), "((ABS, -15), PLUS, ((30, MULTIPLY, (FACT, 2)), MULTIPLY, 3))")
+
+    # abs(-15 + 30) * fact 2 * 3
+    tokens = [
+      Token(TokenType.KEYWORD, "abs"),
+      Token(TokenType.LPAREN),
+      Token(TokenType.NUMBER, -15),
+      Token(TokenType.PLUS),
+      Token(TokenType.NUMBER, 30),
+      Token(TokenType.RPAREN),
+      Token(TokenType.MULTIPLY),
+      Token(TokenType.KEYWORD, "fact"),
+      Token(TokenType.NUMBER, 2),
+      Token(TokenType.MULTIPLY),
+      Token(TokenType.NUMBER, 3),
+    ]
+
+    self.assertEqual(str(Parser(tokens).parse()), "(((ABS, (-15, PLUS, 30)), MULTIPLY, (FACT, 2)), MULTIPLY, 3)")
+
+  ##
+  # @brief Test parsing invalid input with only operators
+  #
+  def test_only_operator_input(self):
+    with self.assertRaises(SyntaxError):
+      Parser([Token(TokenType.PLUS)]).parse()
+
+    with self.assertRaises(SyntaxError):
+      Parser([Token(TokenType.MINUS)]).parse()
+
+    with self.assertRaises(SyntaxError):
+      Parser([Token(TokenType.MULTIPLY)]).parse()
+
+    with self.assertRaises(SyntaxError):
+      Parser([Token(TokenType.DIVIDE)]).parse()
+
+    with self.assertRaises(SyntaxError):
+      Parser([Token(TokenType.POW)]).parse()
+
+    with self.assertRaises(SyntaxError):
+      Parser([Token(TokenType.ROOT)]).parse()
+
+    with self.assertRaises(SyntaxError):
+      Parser([Token(TokenType.KEYWORD, "abs")]).parse()
+
+    with self.assertRaises(SyntaxError):
+      Parser([Token(TokenType.KEYWORD, "ln")]).parse()
+
+    with self.assertRaises(SyntaxError):
+      Parser([Token(TokenType.KEYWORD, "fact")]).parse()
+
+  def test_invalid_multi_operations(self):
+    with self.assertRaises(SyntaxError):
+      Parser([Token(TokenType.MULTIPLY), Token(TokenType.MULTIPLY), Token(TokenType.NUMBER, 10)]).parse()
+
+    with self.assertRaises(SyntaxError):
+      Parser([Token(TokenType.DIVIDE), Token(TokenType.NUMBER, 10), Token(TokenType.MULTIPLY)]).parse()
+
+    with self.assertRaises(SyntaxError):
+      Parser([Token(TokenType.NUMBER, 10), Token(TokenType.MULTIPLY), Token(TokenType.MULTIPLY), Token(TokenType.DIVIDE)]).parse()
+
+    with self.assertRaises(SyntaxError):
+      Parser([Token(TokenType.POW), Token(TokenType.POW), Token(TokenType.NUMBER, 10)]).parse()
+
+    with self.assertRaises(SyntaxError):
+      Parser([Token(TokenType.ROOT), Token(TokenType.NUMBER, 10), Token(TokenType.ROOT)]).parse()
+
+    with self.assertRaises(SyntaxError):
+      Parser([Token(TokenType.NUMBER, 10), Token(TokenType.ROOT), Token(TokenType.POW), Token(TokenType.POW)]).parse()
+
+    with self.assertRaises(SyntaxError):
+      Parser([Token(TokenType.MINUS), Token(TokenType.MINUS), Token(TokenType.NUMBER, 10), Token(TokenType.MINUS), Token(TokenType.POW), Token(TokenType.NUMBER, 10)]).parse()
+
+  ##
+  # @brief Test parsing unfinished expressions
+  #
+  def test_unfinished_expesions(self):
+    with self.assertRaises(SyntaxError):
+      Parser([Token(TokenType.KEYWORD, "fact"), Token(TokenType.NUMBER, 5), Token(TokenType.PLUS)]).parse()
+
+    with self.assertRaises(SyntaxError):
+      Parser([Token(TokenType.KEYWORD, "fact"), Token(TokenType.NUMBER, 5), Token(TokenType.MINUS)]).parse()
+
+    with self.assertRaises(SyntaxError):
+      Parser([Token(TokenType.KEYWORD, "fact"), Token(TokenType.NUMBER, 5), Token(TokenType.MULTIPLY)]).parse()
+
+    with self.assertRaises(SyntaxError):
+      Parser([Token(TokenType.KEYWORD, "fact"), Token(TokenType.NUMBER, 5), Token(TokenType.DIVIDE)]).parse()
+
+    with self.assertRaises(SyntaxError):
+      Parser([Token(TokenType.KEYWORD, "fact"), Token(TokenType.NUMBER, 5), Token(TokenType.POW)]).parse()
+
+    with self.assertRaises(SyntaxError):
+      Parser([Token(TokenType.KEYWORD, "fact"), Token(TokenType.NUMBER, 5), Token(TokenType.ROOT)]).parse()
+
+    with self.assertRaises(SyntaxError):
+      Parser([Token(TokenType.KEYWORD, "fact"), Token(TokenType.NUMBER, 5), Token(TokenType.KEYWORD, "abs")]).parse()
+
+    with self.assertRaises(SyntaxError):
+      Parser([Token(TokenType.KEYWORD, "fact"), Token(TokenType.NUMBER, 5), Token(TokenType.KEYWORD, "ln")]).parse()
+
+    with self.assertRaises(SyntaxError):
+      Parser([Token(TokenType.KEYWORD, "fact"), Token(TokenType.NUMBER, 5), Token(TokenType.KEYWORD, "fact")]).parse()
 
 ##
 # @brief Testing Interpreter class of math library
