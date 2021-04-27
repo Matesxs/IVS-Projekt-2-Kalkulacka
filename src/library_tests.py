@@ -324,8 +324,6 @@ class MathLibTestTokenizer(unittest.TestCase):
     with self.assertRaises(SyntaxError):
       Tokenizer("ab(5) + factln(10) - erand").tokenize()
     with self.assertRaises(SyntaxError):
-      Tokenizer("14 5 * 9 82 - abs( 7 10)").tokenize()
-    with self.assertRaises(SyntaxError):
       Tokenizer("Hello world!").tokenize()
 
 ##
