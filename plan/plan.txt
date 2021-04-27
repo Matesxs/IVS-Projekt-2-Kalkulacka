@@ -11,7 +11,7 @@ Termíny:
 3)  Matematické oprace                                          2.4.2021        Done
 4)  Kontrola a korekce testů mat operací                        2.4.2021        Done
 5)  Testy tokenizeru                                            5.4.2021        Done
-6)  Tokenizer                                                   8.4.2021
+6)  Tokenizer                                                   8.4.2021        Done
 7)  Testy parseru                                               12.4.2021       Done
 8)  Parser                                                      17.4.2021       Done
 9)  Testy interpreteru                                          17.4.2021
