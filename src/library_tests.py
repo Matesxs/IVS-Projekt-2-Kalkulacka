@@ -234,15 +234,15 @@ class MathLibTestTokenizer(unittest.TestCase):
   # @brief Test keywords
   #
   def test_keywords(self):
-    self.assertEqual(Tokenizer("e").tokenize(), [Token(TokenType.KEYWORD, e)])
-    self.assertEqual(Tokenizer("abs").tokenize(), [Token(TokenType.KEYWORD, abs)])
-    self.assertEqual(Tokenizer("ln").tokenize(), [Token(TokenType.KEYWORD, ln)])
-    self.assertEqual(Tokenizer("fact").tokenize(), [Token(TokenType.KEYWORD, fact)])
-    self.assertEqual(Tokenizer("rand").tokenize(), [Token(TokenType.KEYWORD, rand)])
+    self.assertEqual(Tokenizer("e").tokenize(), [Token(TokenType.KEYWORD, "e")])
+    self.assertEqual(Tokenizer("abs").tokenize(), [Token(TokenType.KEYWORD, "abs")])
+    self.assertEqual(Tokenizer("ln").tokenize(), [Token(TokenType.KEYWORD, "ln")])
+    self.assertEqual(Tokenizer("fact").tokenize(), [Token(TokenType.KEYWORD, "fact")])
+    self.assertEqual(Tokenizer("rand").tokenize(), [Token(TokenType.KEYWORD, "rand")])
     self.assertEqual(Tokenizer("abs fact ln").tokenize(), [
-      Token(TokenType.KEYWORD, abs),
-      Token(TokenType.KEYWORD, fact),
-      Token(TokenType.KEYWORD, ln)
+      Token(TokenType.KEYWORD, "abs"),
+      Token(TokenType.KEYWORD, "fact"),
+      Token(TokenType.KEYWORD, "ln")
     ])
   
   ##
@@ -250,7 +250,7 @@ class MathLibTestTokenizer(unittest.TestCase):
   #
   def test_combined_expression(self):
     self.assertEqual(Tokenizer("abs( 10.01 ^(9/ 3)- 15\n*ln(e* e)) +rand*2.5\t +3√18- 654321 \n*fact(4.)+.15").tokenize(), [
-      Token(TokenType.KEYWORD, abs),
+      Token(TokenType.KEYWORD, "abs"),
       Token(TokenType.LPAREN),
       Token(TokenType.NUMBER, 10.01),
       Token(TokenType.POW),
@@ -262,15 +262,15 @@ class MathLibTestTokenizer(unittest.TestCase):
       Token(TokenType.MINUS),
       Token(TokenType.NUMBER, 15),
       Token(TokenType.MULTIPLY),
-      Token(TokenType.KEYWORD, ln),
+      Token(TokenType.KEYWORD, "ln"),
       Token(TokenType.LPAREN),
-      Token(TokenType.KEYWORD, e),
+      Token(TokenType.KEYWORD, "e"),
       Token(TokenType.MULTIPLY),
-      Token(TokenType.KEYWORD, e),
+      Token(TokenType.KEYWORD, "e"),
       Token(TokenType.RPAREN),
       Token(TokenType.RPAREN),
       Token(TokenType.PLUS),
-      Token(TokenType.KEYWORD, rand),
+      Token(TokenType.KEYWORD, "rand"),
       Token(TokenType.MULTIPLY),
       Token(TokenType.NUMBER, 2.5),
       Token(TokenType.PLUS),
@@ -280,7 +280,7 @@ class MathLibTestTokenizer(unittest.TestCase):
       Token(TokenType.MINUS),
       Token(TokenType.NUMBER, 654321),
       Token(TokenType.MULTIPLY),
-      Token(TokenType.KEYWORD, fact),
+      Token(TokenType.KEYWORD, "fact"),
       Token(TokenType.LPAREN),
       Token(TokenType.NUMBER, 4.0),
       Token(TokenType.RPAREN),
