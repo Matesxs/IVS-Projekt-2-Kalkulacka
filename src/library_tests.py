@@ -25,10 +25,10 @@ class MathLibTestBasicFunctions(unittest.TestCase):
     self.assertEqual(MathFunctions.sub_operation(1, 1), 0)
     self.assertEqual(MathFunctions.sub_operation(0, 1), -1)
     self.assertEqual(MathFunctions.sub_operation(1, 0), 1)
-    self.assertEqual(MathFunctions.sub_operation(5.5, 4.3), 1.2)
+    self.assertAlmostEqual(MathFunctions.sub_operation(5.5, 4.3), 1.2)
     self.assertEqual(MathFunctions.sub_operation(-1, 1), -2)
     self.assertEqual(MathFunctions.sub_operation(5, -6), 11)
-    self.assertEqual(MathFunctions.sub_operation(-5.3, -4.1), -1.2)
+    self.assertAlmostEqual(MathFunctions.sub_operation(-5.3, -4.1), -1.2)
     self.assertEqual(MathFunctions.sub_operation(100, 5000000), -4999900)
 
   def test_mul(self):  # multiplication function tests
