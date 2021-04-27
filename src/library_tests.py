@@ -6,6 +6,7 @@ import unittest
 import math
 from mathLib import MathFunctions, Interpreter, Parser, Tokenizer, Token, TokenType
 from mathLib.basics.nodes import *
+from mathLib.entry_point import interpret_text_input
 
 ##
 # @brief Test mathematic operations of math library
