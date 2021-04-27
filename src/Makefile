@@ -1,3 +1,5 @@
+.PHONY: init docs test test_with_coverage clean
+
 init:
 	pip install -r requirements.txt
 
