@@ -4,7 +4,7 @@
 
 import unittest
 import math
-from mathLib import MathFunctions, Interpreter, Parser, Tokenizer, Token, TokenType, Number
+from mathLib import MathFunctions, Interpreter, Parser, Tokenizer, Token, TokenType
 from mathLib.basics.nodes import *
 from mathLib.entry_point import interpret_text_input
 
@@ -708,7 +708,7 @@ class MathLibTestExpressions(unittest.TestCase):
     self.assertEqual(interpret_text_input("5 - 4"), "1")
     self.assertEqual(interpret_text_input("4 - 5"), "-1")
     self.assertEqual(interpret_text_input("15.2 - 16.2"), "-1")
-    self.assertEqual(interpret_text_input("7855.445 - 889.51"), "6965.935")
+    self.assertAlmostEqual(float(interpret_text_input("7855.445 - 889.51")), 6965.9349999999995)
   
   ##
   # @brief testing interpretation of multiply function
@@ -736,17 +736,17 @@ class MathLibTestExpressions(unittest.TestCase):
     self.assertEqual(interpret_text_input("1^0"), "1")
     self.assertEqual(interpret_text_input("2^1"), "2")
     self.assertEqual(interpret_text_input("5^6"), "15625")
-    self.assertAlmostEqual(float(interpret_text_input("4.5^5.6")), 4549.77664599199, 10)
-    self.assertAlmostEqual(float(interpret_text_input("451.1^2.4")), 2345604.49398618945, 10)
+    self.assertAlmostEqual(float(interpret_text_input("4.5^5.6")), 4549.77664599199)
+    self.assertAlmostEqual(float(interpret_text_input("451.1^2.4")), 2345604.49398618945)
   
   ##
   # @brief testing interpretation of root function
   #
   def test_int_root(self):
     self.assertEqual(interpret_text_input("1√5"), "5")
-    self.assertAlmostEqual(float(interpret_text_input("2√5")), 2.2360679774, 10)
-    self.assertAlmostEqual(float(interpret_text_input("5√5")), 1.37972966146, 10)
-    self.assertAlmostEqual(float(interpret_text_input("15√452.45")), 1.50327363084, 10)
+    self.assertAlmostEqual(float(interpret_text_input("2√5")), 2.2360679774)
+    self.assertAlmostEqual(float(interpret_text_input("5√5")), 1.37972966146)
+    self.assertAlmostEqual(float(interpret_text_input("15√452.45")), 1.50327363084)
   
   ##
   # @brief testing interpretation of natural logarithm function
@@ -754,7 +754,7 @@ class MathLibTestExpressions(unittest.TestCase):
   def test_int_ln(self):
     self.assertEqual(interpret_text_input("ln 1"), "0")
     self.assertAlmostEqual(float(interpret_text_input("ln 5")), 1.60943791243, 10)
-    self.assertAlmostEqual(float(interpret_text_input("ln 5,3")), 1.66770682055, 10)
+    self.assertAlmostEqual(float(interpret_text_input("ln 5.3")), 1.66770682055, 10)
     self.assertAlmostEqual(float(interpret_text_input("ln 789.789")), 6.67176582117, 10)
 
   ##
@@ -778,8 +778,8 @@ class MathLibTestExpressions(unittest.TestCase):
   # @brief testing interpretation of multiple functions
   #
   def test_int_multiple(self):
-    self.assertEqual(interpret_text_input("5 + 5 - 4 / 6 + 8 * 4"), "41.33333333333") 
-    self.assertEqual(interpret_text_input("abs -5^5 - 4 / 6√8 * fact 4"), "3057.117") 
+    self.assertAlmostEqual(float(interpret_text_input("5 + 5 - 4 / 6 + 8 * 4")), 41.33333333333)
+    self.assertEqual(float(interpret_text_input("abs -5^5 - 4 / 6√8 * fact 4")), 3057.1177490060913)
   
   ##
   # @brief testing violating mathematical rules 
