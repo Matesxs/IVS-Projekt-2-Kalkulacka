@@ -1,4 +1,9 @@
-.PHONY: init docs test test_with_coverage clean
+.PHONY: all run init docs test test_with_coverage clean
+
+all: init run
+
+run:
+	python main.py
 
 init:
 	pip install -r requirements.txt
