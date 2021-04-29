@@ -14,11 +14,11 @@ Termíny:
 6)  Tokenizer                                                   8.4.2021        Done
 7)  Testy parseru                                               12.4.2021       Done
 8)  Parser                                                      17.4.2021       Done
-9)  Testy interpreteru                                          17.4.2021
-10) Interpreter                                                 19.4.2021
-11) Testy endpointu, kontrola tokenizer - interpreter           20.4.2021
-12) Endpoint                                                    21.4.2021
-13) Kontrola testů a edgecasů                                   22.4.2021
+9)  Testy interpreteru                                          17.4.2021       Done
+10) Interpreter                                                 19.4.2021       Done
+11) Testy endpointu, kontrola tokenizer - interpreter           20.4.2021       Done
+12) Endpoint                                                    21.4.2021       Done
+13) Kontrola testů a edgecasů                                   22.4.2021       Done
 14) UI, profiling                                               22.4.2021
 15) Integrace mat knihovny do UI                                23.4.2021
 16) Testování                                                   24.4.2021
