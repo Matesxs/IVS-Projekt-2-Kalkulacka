@@ -4,6 +4,7 @@
 
 from app_ui import Ui_Calculator
 from PyQt5 import QtWidgets
+from mathLib.entry_point import interpret_text_input
 
 ##
 # @brief Class for connection between GUI and math library
@@ -72,17 +73,19 @@ class CalculatorApp(QtWidgets.QMainWindow, Ui_Calculator):
       self.input.setCursorPosition(start_pos - 1)
 
   ##
-  # @brief Solve expression
+  # @brief Solve input expression
   #
   def solve(self):
-    if self.input.text() = "Error"
+    if self.input.text() == "Error"
       self.erase()
     
     self.input.setText(interpret_text_input(self.input.text()))
     self.input.setFocus()
   
   ##
-  # @brief 
+  # @brief Add string to the input on the cursor position
+  #
+  # @param String added to the input
   #
   def write_to_input(self, value):
     start_pos = self.input.CursorPosition()
@@ -91,58 +94,70 @@ class CalculatorApp(QtWidgets.QMainWindow, Ui_Calculator):
     self.input.setCursorPosition(start_pos + len(value))
   
   ##
-  # @brief 
+  # @brief Common button press
   #
   def button_pressed(self):
     button = self.sender()
-    if self.input.text = "Error"
+    if self.input.text == "Error"
       self.erase()
     write_to_input(button.text(button.text()))
   
   ##
-  # @brief 
+  # @brief root button press
   #
   def root_pressed(self):
-    if self.input.text() = "Error"
+    if self.input.text() == "Error"
       self.erase()
     self.write_to_input("√")
   
   ##
-  # @brief 
+  # @brief abs button press
   #
   def abs_pressed(self):
-    if self.input.text() = "Error"
+    if self.input.text() == "Error"
       self.erase()
     self.write_to_input("abs(")
   
   ##
-  # @brief 
+  # @brief ln button press
   #
   def ln_pressed(self):
-    if self.input.text() = "Error"
+    if self.input.text() == "Error"
       self.erase()
     self.write_to_input("ln(")
 
   ##
-  # @brief 
+  # @brief fact button press
   #
   def fact_pressed(self):
-    if self.input.text() = "Error"
+    if self.input.text() == "Error"
       self.erase()
     self.write_to_input("fact(")
 
   ##
-  # @brief 
+  # @brief e power button press
   #
   def e_power_pressed(self):
-    if self.input.text() = "Error"
+    if self.input.text() == "Error"
       self.erase()
     self.write_to_input("e^")
 
   ##
-  # @brief 
+  # @brief ten power button press
   #
   def ten_power_pressed(self):
-    if self.input.text() = "Error"
+    if self.input.text() == "Error"
       self.erase()
     self.write_to_input("10^")
+  
+  ##
+  # @brief Keyboard input
+  #
+  # @param Event key
+  #
+  def key_pressed_event(self, event):
+    if event.key() == QtCore.Qt.Key_Enter or event.key() == QtCore.Qt.Key_Return:
+      self.solve_input()
+    
+    if event.key() == QtCore.Qt.Key_Escape:
+      self.erase()
