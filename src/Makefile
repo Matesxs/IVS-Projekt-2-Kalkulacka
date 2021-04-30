@@ -1,4 +1,4 @@
-.PHONY: all run init docs test test_with_coverage clean build build_standalone build_installer
+.PHONY: all run init docs test test_with_coverage clean build build_standalone build_installer profile profile_with_log pack
 all: init run
 
 run:
@@ -17,6 +17,12 @@ test_with_coverage:
 	-coverage run library_tests.py
 	coverage report -m
 	python utils/remove.py ".coverage"
+
+profile:
+	python profiling.py
+
+profile_with_log:
+	python profiling_with_log.py
 
 clean:
 	python utils/remove.py "..\docs"
@@ -43,3 +49,14 @@ build_installer:
 	python utils/remove.py "build"
 	python utils/remove.py "dist"
 	python utils/remove.py "Calculator.spec"
+
+pack: build doc
+	python utils/create_folder.py "..\..\xdousa00_xslama32_xschin05"
+	xcopy /s /c /q "..\\docs\\" "..\\..\\xdousa00_xslama32_xschin05\\docs\\"
+	xcopy /s /c /q "..\\install\\" "..\\..\\xdousa00_xslama32_xschin05\\install\\"
+	make clean
+	python utils/create_folder.py "..\..\xdousa00_xslama32_xschin05\repo"
+	xcopy /s /c /q "..\\.git\\" "..\\..\\xdousa00_xslama32_xschin05\\repo\\.git\\"
+	xcopy /s /c /q "..\\*" "..\\..\\xdousa00_xslama32_xschin05\\repo\\*"
+	python utils/pack_files.py
+	rmdir /q /s "..\..\xdousa00_xslama32_xschin05"
