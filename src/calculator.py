@@ -3,7 +3,7 @@
 #
 
 from app_ui import Ui_Calculator
-from PyQt5 import QtWidgets
+from PyQt5 import QtWidgets, QtCore
 from mathLib.entry_point import interpret_text_input
 
 ##
@@ -58,8 +58,8 @@ class CalculatorApp(QtWidgets.QMainWindow, Ui_Calculator):
   # @brief Erase line
   #
   def erase(self):
-    self.input.setText("");
-    self.input.setFocus();
+    self.input.setText("")
+    self.input.setFocus()
   
   ##
   # @brief Erase last character in front of the cursor
@@ -76,7 +76,7 @@ class CalculatorApp(QtWidgets.QMainWindow, Ui_Calculator):
   # @brief Solve input expression
   #
   def solve(self):
-    if self.input.text() == "Error"
+    if self.input.text() == "Error":
       self.erase()
     
     self.input.setText(interpret_text_input(self.input.text()))
@@ -98,7 +98,7 @@ class CalculatorApp(QtWidgets.QMainWindow, Ui_Calculator):
   #
   def button_pressed(self):
     button = self.sender()
-    if self.input.text == "Error"
+    if self.input.text == "Error":
       self.erase()
     write_to_input(button.text(button.text()))
   
@@ -106,7 +106,7 @@ class CalculatorApp(QtWidgets.QMainWindow, Ui_Calculator):
   # @brief root button press
   #
   def root_pressed(self):
-    if self.input.text() == "Error"
+    if self.input.text() == "Error":
       self.erase()
     self.write_to_input("√")
   
@@ -114,7 +114,7 @@ class CalculatorApp(QtWidgets.QMainWindow, Ui_Calculator):
   # @brief abs button press
   #
   def abs_pressed(self):
-    if self.input.text() == "Error"
+    if self.input.text() == "Error":
       self.erase()
     self.write_to_input("abs(")
   
@@ -122,7 +122,7 @@ class CalculatorApp(QtWidgets.QMainWindow, Ui_Calculator):
   # @brief ln button press
   #
   def ln_pressed(self):
-    if self.input.text() == "Error"
+    if self.input.text() == "Error":
       self.erase()
     self.write_to_input("ln(")
 
@@ -130,7 +130,7 @@ class CalculatorApp(QtWidgets.QMainWindow, Ui_Calculator):
   # @brief fact button press
   #
   def fact_pressed(self):
-    if self.input.text() == "Error"
+    if self.input.text() == "Error":
       self.erase()
     self.write_to_input("fact(")
 
@@ -138,7 +138,7 @@ class CalculatorApp(QtWidgets.QMainWindow, Ui_Calculator):
   # @brief e power button press
   #
   def e_power_pressed(self):
-    if self.input.text() == "Error"
+    if self.input.text() == "Error":
       self.erase()
     self.write_to_input("e^")
 
@@ -146,7 +146,7 @@ class CalculatorApp(QtWidgets.QMainWindow, Ui_Calculator):
   # @brief ten power button press
   #
   def ten_power_pressed(self):
-    if self.input.text() == "Error"
+    if self.input.text() == "Error":
       self.erase()
     self.write_to_input("10^")
   
