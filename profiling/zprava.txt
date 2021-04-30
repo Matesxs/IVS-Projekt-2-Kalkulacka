@@ -1,0 +1,5 @@
+Z outputu profileru je vidět že program je celkově velmi rychlí a nikde není extra dlouhá prodleva.
+Nejvíc času totiž bere evaluace jednotlivých operací v intereteru což je pochopitelné protože při testování bylo hodně operací sčítání. (Testováno na odchylce pro 100 000 náhodných čísel)
+Časy z vystup.png nesedí z nějakého důvodu, nepovedlo se nám přijít na to proč a tak bylo přidáno ještě raw logování do vystup.txt pomocí jiné knihovny a vystup.png využíváme jen pro reprezentaci počtu callů.
+Bez overheadu profilingových knihoven byla tato knihovna schopna odchylku 100 000 náhodných čísel spočítat za 2.5ms.
+Je potřeba zmínit že na nic nevyužíváme více jader (teda aspoň ne přímo v naší implementaci, je možné že něco takového dělá python sám) ani gpu akceleraci, takže je zde stále místo pro zlepšení.

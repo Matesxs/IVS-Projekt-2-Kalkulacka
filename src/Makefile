@@ -1,4 +1,4 @@
-.PHONY: all run init docs test test_with_coverage clean build build_standalone build_installer
+.PHONY: all run init docs test test_with_coverage clean build build_standalone build_installer profile profile_with_log pack
 all: init run
 
 run:
@@ -17,6 +17,12 @@ test_with_coverage:
 	-coverage run library_tests.py
 	coverage report -m
 	python utils/remove.py ".coverage"
+
+profile:
+	python profiling.py
+
+profile_with_log:
+	python profiling_with_log.py
 
 clean:
 	python utils/remove.py "..\docs"
