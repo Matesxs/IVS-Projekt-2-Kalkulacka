@@ -45,12 +45,12 @@ class CalculatorApp(QtWidgets.QMainWindow, Ui_Calculator):
     self.button_root.clicked.connect(self.root_pressed)
     self.abs_button.clicked.connect(self.abs_pressed)
     self.button_ln.clicked.connect(self.ln_pressed)
-    self.button_fact.clicked.connect(self.fact_pressed)
+    self.button_factorial.clicked.connect(self.fact_pressed)
     self.e_power_button.clicked.connect(self.e_power_pressed)
     self.ten_power_button.clicked.connect(self.ten_power_pressed)
     self.button_c.clicked.connect(self.erase_last)
     self.button_del.clicked.connect(self.erase)
-    self.button_equal.clicked.connect(self.solve_input)
+    self.button_equal.clicked.connect(self.solve)
 
     self.input.setFocus()
   
@@ -88,7 +88,7 @@ class CalculatorApp(QtWidgets.QMainWindow, Ui_Calculator):
   # @param String added to the input
   #
   def write_to_input(self, value):
-    start_pos = self.input.CursorPosition()
+    start_pos = self.input.cursorPosition()
     self.input.setText(self.input.text()[:start_pos] + value + self.input.text()[start_pos:])
     self.input.setFocus()
     self.input.setCursorPosition(start_pos + len(value))
@@ -100,7 +100,7 @@ class CalculatorApp(QtWidgets.QMainWindow, Ui_Calculator):
     button = self.sender()
     if self.input.text == "Error":
       self.erase()
-    write_to_input(button.text(button.text()))
+    self.write_to_input(button.text())
   
   ##
   # @brief root button press
@@ -157,7 +157,7 @@ class CalculatorApp(QtWidgets.QMainWindow, Ui_Calculator):
   #
   def key_pressed_event(self, event):
     if event.key() == QtCore.Qt.Key_Enter or event.key() == QtCore.Qt.Key_Return:
-      self.solve_input()
+      self.solve()
     
     if event.key() == QtCore.Qt.Key_Escape:
       self.erase()
