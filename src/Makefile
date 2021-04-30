@@ -16,6 +16,7 @@ test:
 test_with_coverage:
 	-coverage run library_tests.py
 	coverage report -m
+	python utils/remove.py ".coverage"
 
 clean:
 	python utils/remove.py "..\docs"
