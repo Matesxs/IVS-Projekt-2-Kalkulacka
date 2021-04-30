@@ -22,5 +22,8 @@ class Number:
     int_val = int(self.value)
     return self.value if int_val != self.value else int_val
 
+  ##
+  # @brief Representation of number when printed
+  #
   def __repr__(self):
     return f"{self.get_value()}"

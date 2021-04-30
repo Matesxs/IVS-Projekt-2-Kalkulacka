@@ -562,6 +562,9 @@ class MathLibTestParser(unittest.TestCase):
     with self.assertRaises(SyntaxError):
       Parser([Token(TokenType.KEYWORD, "fact")]).parse()
 
+  ##
+  # @brief Test invalid operations on parser
+  #
   def test_invalid_multi_operations(self):
     with self.assertRaises(SyntaxError):
       Parser([Token(TokenType.MULTIPLY), Token(TokenType.MULTIPLY), Token(TokenType.NUMBER, 10)]).parse()
