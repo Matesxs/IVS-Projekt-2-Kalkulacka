@@ -1,3 +1,3 @@
-xdousa00 x ()
-xslama32 x ()
-xschin05 x ()
+xdousa00 100 (Repozitář, requirements.txt, základ makefile, první nástřel UI, parser, testy parseru, tokenizer, interpreter, endpoint, installer)
+xslama32 100 (Matematické oprace, Testy tokenizeru, dokumentace, Integrace mat knihovny do UI, Testování)
+xschin05 100 (Testy mat operací, Testy interpreteru, Testy endpointu, Kontrola tokenizer - interpreter)

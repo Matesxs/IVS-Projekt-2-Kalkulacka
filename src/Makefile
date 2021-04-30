@@ -43,3 +43,14 @@ build_installer:
 	python utils/remove.py "build"
 	python utils/remove.py "dist"
 	python utils/remove.py "Calculator.spec"
+
+pack: build doc
+	python utils/create_folder.py "..\..\xdousa00_xslama32_xschin05"
+	xcopy /s /c /q "..\\docs\\" "..\\..\\xdousa00_xslama32_xschin05\\docs\\"
+	xcopy /s /c /q "..\\install\\" "..\\..\\xdousa00_xslama32_xschin05\\install\\"
+	make clean
+	python utils/create_folder.py "..\..\xdousa00_xslama32_xschin05\repo"
+	xcopy /s /c /q "..\\.git\\" "..\\..\\xdousa00_xslama32_xschin05\\repo\\.git\\"
+	xcopy /s /c /q "..\\*" "..\\..\\xdousa00_xslama32_xschin05\\repo\\*"
+	python utils/pack_files.py
+	rmdir /q /s "..\..\xdousa00_xslama32_xschin05"
