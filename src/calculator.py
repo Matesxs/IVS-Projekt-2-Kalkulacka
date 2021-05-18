@@ -48,8 +48,8 @@ class CalculatorApp(QtWidgets.QMainWindow, Ui_Calculator):
     self.button_factorial.clicked.connect(self.fact_pressed)
     self.e_power_button.clicked.connect(self.e_power_pressed)
     self.ten_power_button.clicked.connect(self.ten_power_pressed)
-    self.button_c.clicked.connect(self.erase_last)
-    self.button_del.clicked.connect(self.erase)
+    self.button_c.clicked.connect(self.erase)
+    self.button_del.clicked.connect(self.erase_last)
     self.button_equal.clicked.connect(self.solve)
 
     self.input.setFocus()
@@ -155,7 +155,7 @@ class CalculatorApp(QtWidgets.QMainWindow, Ui_Calculator):
   #
   # @param Event key
   #
-  def key_pressed_event(self, event):
+  def keyPressEvent(self, event):
     if event.key() == QtCore.Qt.Key_Enter or event.key() == QtCore.Qt.Key_Return:
       self.solve()
     
