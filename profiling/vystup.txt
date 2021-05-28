@@ -1,44 +1,44 @@
-         8885734 function calls (7085629 primitive calls) in 3.325 seconds
+         8885720 function calls (7085615 primitive calls) in 3.361 seconds
 
    Ordered by: cumulative time
 
    ncalls  tottime  percall  cumtime  percall filename:lineno(function)
-        1    0.036    0.036    3.418    3.418 profiling_with_log.py:17(standart_deviation)
-        1    0.000    0.000    3.382    3.382 /mnt/f/Skola/2_semestr/IVS/ivs_projekt_2/src/mathLib/entry_point.py:15(interpret_text_input)
-        1    0.301    0.301    1.721    1.721 /mnt/f/Skola/2_semestr/IVS/ivs_projekt_2/src/mathLib/tokenizer.py:54(tokenize)
-   200008    0.652    0.000    1.292    0.000 /mnt/f/Skola/2_semestr/IVS/ivs_projekt_2/src/mathLib/tokenizer.py:107(parse_number_token)
-        1    0.000    0.000    1.020    1.020 /mnt/f/Skola/2_semestr/IVS/ivs_projekt_2/src/mathLib/prsr.py:50(parse)
-      8/1    0.000    0.000    1.020    1.020 /mnt/f/Skola/2_semestr/IVS/ivs_projekt_2/src/mathLib/prsr.py:73(expr)
- 400031/1    0.230    0.000    1.020    1.020 /mnt/f/Skola/2_semestr/IVS/ivs_projekt_2/src/mathLib/prsr.py:161(binary_operation)
- 200008/1    0.304    0.000    1.020    1.020 /mnt/f/Skola/2_semestr/IVS/ivs_projekt_2/src/mathLib/prsr.py:84(term)
- 200015/1    0.087    0.000    1.020    1.020 /mnt/f/Skola/2_semestr/IVS/ivs_projekt_2/src/mathLib/prsr.py:96(factor)
- 200015/1    0.085    0.000    1.020    1.020 /mnt/f/Skola/2_semestr/IVS/ivs_projekt_2/src/mathLib/prsr.py:114(power)
- 200015/2    0.101    0.000    1.020    0.510 /mnt/f/Skola/2_semestr/IVS/ivs_projekt_2/src/mathLib/prsr.py:124(atom)
-  1842700    0.356    0.000    0.645    0.000 /mnt/f/Skola/2_semestr/IVS/ivs_projekt_2/src/mathLib/tokenizer.py:41(move_forward)
- 400015/1    0.170    0.000    0.642    0.642 /mnt/f/Skola/2_semestr/IVS/ivs_projekt_2/src/mathLib/interpreter.py:25(interpret)
- 200007/1    0.269    0.000    0.642    0.642 /mnt/f/Skola/2_semestr/IVS/ivs_projekt_2/src/mathLib/interpreter.py:81(visit_BinaryOperationNode)
-  2242730    0.357    0.000    0.357    0.000 /mnt/f/Skola/2_semestr/IVS/ivs_projekt_2/src/mathLib/basics/iterator.py:21(next)
-   400030    0.087    0.000    0.155    0.000 /mnt/f/Skola/2_semestr/IVS/ivs_projekt_2/src/mathLib/prsr.py:38(move_forward)
-   200008    0.048    0.000    0.066    0.000 /mnt/f/Skola/2_semestr/IVS/ivs_projekt_2/src/mathLib/interpreter.py:44(visit_NumberNode)
-   400015    0.062    0.000    0.062    0.000 /mnt/f/Skola/2_semestr/IVS/ivs_projekt_2/src/mathLib/basics/number_class.py:21(get_value)
-   400029    0.059    0.000    0.059    0.000 <string>:2(__init__)
-   400015    0.042    0.000    0.042    0.000 {built-in method builtins.getattr}
+        1    0.052    0.052    3.502    3.502 profiling_with_log.py:17(standart_deviation)
+        1    0.000    0.000    3.450    3.450 F:\Skola\2_semestr\IVS\ivs_projekt_2\src\mathLib\entry_point.py:17(interpret_text_input)
+        1    0.290    0.290    1.772    1.772 F:\Skola\2_semestr\IVS\ivs_projekt_2\src\mathLib\tokenizer.py:56(tokenize)
+   200008    0.667    0.000    1.342    0.000 F:\Skola\2_semestr\IVS\ivs_projekt_2\src\mathLib\tokenizer.py:109(parse_number_token)
+        1    0.000    0.000    1.006    1.006 F:\Skola\2_semestr\IVS\ivs_projekt_2\src\mathLib\prsr.py:51(parse)
+      8/1    0.000    0.000    1.006    1.006 F:\Skola\2_semestr\IVS\ivs_projekt_2\src\mathLib\prsr.py:74(expr)
+ 400031/1    0.224    0.000    1.006    1.006 F:\Skola\2_semestr\IVS\ivs_projekt_2\src\mathLib\prsr.py:162(binary_operation)
+ 200008/1    0.271    0.000    1.006    1.006 F:\Skola\2_semestr\IVS\ivs_projekt_2\src\mathLib\prsr.py:85(term)
+ 200015/1    0.092    0.000    1.006    1.006 F:\Skola\2_semestr\IVS\ivs_projekt_2\src\mathLib\prsr.py:97(factor)
+ 200015/1    0.088    0.000    1.006    1.006 F:\Skola\2_semestr\IVS\ivs_projekt_2\src\mathLib\prsr.py:115(power)
+ 200015/2    0.110    0.000    1.006    0.503 F:\Skola\2_semestr\IVS\ivs_projekt_2\src\mathLib\prsr.py:125(atom)
+  1842700    0.362    0.000    0.672    0.000 F:\Skola\2_semestr\IVS\ivs_projekt_2\src\mathLib\tokenizer.py:43(move_forward)
+ 400015/1    0.165    0.000    0.672    0.672 F:\Skola\2_semestr\IVS\ivs_projekt_2\src\mathLib\interpreter.py:25(interpret)
+ 200007/1    0.287    0.000    0.672    0.672 F:\Skola\2_semestr\IVS\ivs_projekt_2\src\mathLib\interpreter.py:81(visit_BinaryOperationNode)
+  2242730    0.382    0.000    0.382    0.000 F:\Skola\2_semestr\IVS\ivs_projekt_2\src\mathLib\basics\iterator.py:23(next)
+   400030    0.086    0.000    0.157    0.000 F:\Skola\2_semestr\IVS\ivs_projekt_2\src\mathLib\prsr.py:39(move_forward)
+   400015    0.080    0.000    0.080    0.000 F:\Skola\2_semestr\IVS\ivs_projekt_2\src\mathLib\basics\number_class.py:21(get_value)
+   200008    0.049    0.000    0.065    0.000 F:\Skola\2_semestr\IVS\ivs_projekt_2\src\mathLib\interpreter.py:44(visit_NumberNode)
+   400015    0.045    0.000    0.045    0.000 {built-in method builtins.getattr}
+   400015    0.032    0.000    0.032    0.000 <string>:2(__init__)
    400029    0.023    0.000    0.023    0.000 {method 'append' of 'list' objects}
-   200008    0.020    0.000    0.020    0.000 {method 'endswith' of 'str' objects}
+   200008    0.021    0.000    0.021    0.000 {method 'endswith' of 'str' objects}
    200008    0.020    0.000    0.020    0.000 {method 'startswith' of 'str' objects}
-   199998    0.017    0.000    0.017    0.000 /mnt/f/Skola/2_semestr/IVS/ivs_projekt_2/src/mathLib/basics/math_functions.py:15(add_operation)
-        1    0.000    0.000    0.000    0.000 /usr/lib/python3.8/_weakrefset.py:38(_remove)
-        1    0.000    0.000    0.000    0.000 /mnt/f/Skola/2_semestr/IVS/ivs_projekt_2/src/mathLib/basics/number_class.py:25(__repr__)
-        1    0.000    0.000    0.000    0.000 /mnt/f/Skola/2_semestr/IVS/ivs_projekt_2/src/mathLib/tokenizer.py:32(__init__)
-        1    0.000    0.000    0.000    0.000 /mnt/f/Skola/2_semestr/IVS/ivs_projekt_2/src/mathLib/prsr.py:29(__init__)
-       21    0.000    0.000    0.000    0.000 /mnt/f/Skola/2_semestr/IVS/ivs_projekt_2/src/mathLib/basics/tokens.py:38(matches)
-        1    0.000    0.000    0.000    0.000 /mnt/f/Skola/2_semestr/IVS/ivs_projekt_2/src/mathLib/basics/math_functions.py:45(power_operation)
-        2    0.000    0.000    0.000    0.000 /mnt/f/Skola/2_semestr/IVS/ivs_projekt_2/src/mathLib/basics/math_functions.py:36(divide_operation)
-        3    0.000    0.000    0.000    0.000 /mnt/f/Skola/2_semestr/IVS/ivs_projekt_2/src/mathLib/basics/math_functions.py:29(multiply_operation)
-        2    0.000    0.000    0.000    0.000 /mnt/f/Skola/2_semestr/IVS/ivs_projekt_2/src/mathLib/basics/iterator.py:12(__init__)
-        2    0.000    0.000    0.000    0.000 /mnt/f/Skola/2_semestr/IVS/ivs_projekt_2/src/mathLib/basics/math_functions.py:22(sub_operation)
-        1    0.000    0.000    0.000    0.000 /mnt/f/Skola/2_semestr/IVS/ivs_projekt_2/src/mathLib/basics/math_functions.py:55(root_operation)
+   199998    0.014    0.000    0.014    0.000 F:\Skola\2_semestr\IVS\ivs_projekt_2\src\mathLib\basics\math_functions.py:20(add_operation)
+        1    0.000    0.000    0.000    0.000 C:\Users\marti\AppData\Local\Programs\Python\Python37\lib\_weakrefset.py:38(_remove)
+        1    0.000    0.000    0.000    0.000 F:\Skola\2_semestr\IVS\ivs_projekt_2\src\mathLib\basics\number_class.py:28(__repr__)
+        1    0.000    0.000    0.000    0.000 F:\Skola\2_semestr\IVS\ivs_projekt_2\src\mathLib\tokenizer.py:32(__init__)
+        1    0.000    0.000    0.000    0.000 F:\Skola\2_semestr\IVS\ivs_projekt_2\src\mathLib\basics\math_functions.py:76(power_operation)
+        3    0.000    0.000    0.000    0.000 F:\Skola\2_semestr\IVS\ivs_projekt_2\src\mathLib\basics\math_functions.py:46(multiply_operation)
+       21    0.000    0.000    0.000    0.000 F:\Skola\2_semestr\IVS\ivs_projekt_2\src\mathLib\basics\tokens.py:57(matches)
+        1    0.000    0.000    0.000    0.000 F:\Skola\2_semestr\IVS\ivs_projekt_2\src\mathLib\prsr.py:27(__init__)
+        2    0.000    0.000    0.000    0.000 F:\Skola\2_semestr\IVS\ivs_projekt_2\src\mathLib\basics\math_functions.py:61(divide_operation)
+        1    0.000    0.000    0.000    0.000 F:\Skola\2_semestr\IVS\ivs_projekt_2\src\mathLib\basics\math_functions.py:96(root_operation)
+        2    0.000    0.000    0.000    0.000 F:\Skola\2_semestr\IVS\ivs_projekt_2\src\mathLib\basics\iterator.py:14(__init__)
         1    0.000    0.000    0.000    0.000 {method 'discard' of 'set' objects}
+        2    0.000    0.000    0.000    0.000 F:\Skola\2_semestr\IVS\ivs_projekt_2\src\mathLib\basics\math_functions.py:33(sub_operation)
         1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
 
 

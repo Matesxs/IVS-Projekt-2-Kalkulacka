@@ -1,5 +1,33 @@
-Z outputu profileru je vidět že program je celkově velmi rychlý a nikde není extra dlouhá prodleva.
-Nejvíc času totiž bere evaluace jednotlivých operací v intereteru což je pochopitelné, protože při testování bylo hodně operací sčítání. (Testováno na odchylce pro 100 000 náhodných čísel)
-Časy z vystup.png nesedí z nějakého důvodu, nepovedlo se nám přijít na to proč a tak bylo přidáno ještě raw logování do vystup.txt pomocí jiné knihovny a vystup.png využíváme jen pro reprezentaci počtu callů.
-Bez overheadu profilingových knihoven byla tato knihovna schopna odchylku 100 000 náhodných čísel spočítat za 2.5ms.
-Je potřeba zmínit že na nic nevyužíváme více jader (teda aspoň ne přímo v naší implementaci, je možné že něco takového dělá python sám) ani gpu akceleraci, takže je zde stále místo pro zlepšení.
+Testovací hardware:
+  Processor: i7-9700KF OC 4.8GHz
+  GPU: RTX 2080S
+  RAM: 32GB 3200MHz
+
+  Sestava byla restartována před prováděním profilingu
+
+Testovací prostředí:
+  WSL - Ubuntu 20.04 LTS
+
+  Software:
+    Python - pycallgraph, cProfile, pstats, io, time
+
+Metodika:
+  1) Bylo vygenerováno 100_000 postupně jdoucích čísel od 0 po 99_999
+  2) Z vygenerovaných čísel byl složen vstupní string odpovídající vzorci standartní odchylce
+  3a) Vstupní string byl nejdříve interpreteván prostředí package pycallgraph k vyhodnocení počtu callů jednotlivých funkcí a výstup byl uložen do souboru vystup.png
+      (Tento test se nakonec nebral ani moc v úvahu, byl použit pouze jako kontrola počtu callů z následujícího testu)
+  3b) Vstupní string byl interpretován v prostředí cProfile pro získání časů volání funkcí a kumulativního času jednotlivých funkcí. Výstup byl uložen do souboru vystup.txt
+  3c) Pro finální ověření správnosti byl vstupní string interpretován s měřením času pomocí time pro ověření že čas z cProfile je správný. Tento čas byl poté vypsán na konzoli.
+  4) Výše uvedená metodika byla několikrát opakována pro eliminaci náhodných vlivů na výsledek testu
+
+Výsledek:
+  Po několika spuštěních testovacího scriptu jsme spočítali průměrnou dobu spuštění, která nám vyšla 3.4ms (počítáno z cProfile), přes time tento čas vycházel shruba o 1ms nižší, zřejmě kvůli nějakému overheadu knihovny.
+  V souboru vystup.png můžeme vidět počty callů jednotlivých funkcí, které se shodují z počtem callů z vystup.txt, takže je můžeme považovat za srávné.
+  V souboru vystup.txt můžeme vidět že většina funkcí je extrémně rychlá a pro jednotlivé cally se nenaměřila žádná hodnota.
+  Nejdéle ze všech operací trvala tokenizace což bylo očekávané protože vstupní string je poměrně dlouhý a tokenizer ho prochází znak po znaku, ale i tak jsme zde na asi 1.7ms z čehož bylo přibližne 0.6ms na iterování skz string.
+  Tato část by určitě šla optimalizovat, ale nebylo potřeba, protože tato rychlost procházení je pro tento produkt dostatečná.
+  Další z nejdelších operací bylo parsování, kde jsme naměřili kolem 1ms, zbytek (asi 0.6ms) připadá na interpretaci.
+
+Závěr:
+  S výsledkem profilingu jsme spokojeni, z výstupu není vidět že by nás nějaká část knihovny nějak extra brzdila a takže žádné optimalizace nejsou potřeba.
+  V rámci přípravy jsme diskutovali tento výsledek i s několika dalšími teamy a mezi nimi jsme dostáhli jednoho z nejlepších výsledků.
