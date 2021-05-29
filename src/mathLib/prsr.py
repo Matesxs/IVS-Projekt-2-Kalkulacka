@@ -2,10 +2,8 @@
 # @package prsr
 #
 
-from typing import Union
 import random
 import math
-from .basics.tokens import Token
 from .basics.tokens import TokenType
 from .basics.nodes import *
 from .basics.iterator import Iterator
@@ -27,9 +25,12 @@ class Parser:
   # @param tokens List of tokens to parse
   #
   def __init__(self, tokens:list):
+    ## Iterator for iterating over tokens
     self.token_interator = Iterator(tokens)
 
-    self.current_token:Union[Token, None] = None
+    ## Store for current token
+    self.current_token = None
+
     self.move_forward()
 
   ##

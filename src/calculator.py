@@ -153,7 +153,7 @@ class CalculatorApp(QtWidgets.QMainWindow, Ui_Calculator):
   ##
   # @brief Keyboard input
   #
-  # @param Event key
+  # @param event Key press event
   #
   def keyPressEvent(self, event):
     if event.key() == QtCore.Qt.Key_Enter or event.key() == QtCore.Qt.Key_Return:

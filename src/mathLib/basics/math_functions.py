@@ -12,12 +12,20 @@ class MathFunctions:
   ##
   # @brief Addition
   #
+  # @param num1 Int or float
+  # @param num2 Int or float
+  # @return Result of addition num1 to num2
+  #
   @staticmethod
   def add_operation(num1, num2):
     return num1 + num2
 
   ##
   # @brief Subtraction
+  #
+  # @param num1 Int or float
+  # @param num2 Int or float
+  # @return Result of subtraction num2 from num1
   #
   @staticmethod
   def sub_operation(num1, num2):
@@ -26,12 +34,23 @@ class MathFunctions:
   ##
   # @brief Multiplication
   #
+  # @param num1 Int or float
+  # @param num2 Int or float
+  # @return Result of multiplication num1 and num2
+  #
   @staticmethod
   def multiply_operation(num1, num2):
     return num1 * num2
 
   ##
   # @brief Division
+  #
+  # @warning
+  # num2 can not be zero
+  #
+  # @param num1 Int or float
+  # @param num2 Int or flaot
+  # @return Result of division num1 by num2
   #
   @staticmethod
   def divide_operation(num1, num2):
@@ -42,6 +61,13 @@ class MathFunctions:
   ##
   # @brief Power
   #
+  # @warning
+  # num2 must be int if num1 is negative
+  #
+  # @param num1 Int or float
+  # @param num2 Int or float
+  # @return Result of powering num1 by num2
+  #
   @staticmethod
   def power_operation(num1, num2):
     if num1 < 0 and int(num2) != num2:
@@ -51,6 +77,15 @@ class MathFunctions:
 
   ##
   # @brief Root
+  #
+  # @warning
+  # value can not be negative
+  # @warning
+  # n can not be zero
+  #
+  # @param n Int or float
+  # @param value Int or float
+  # @return Result of nth root of value
   #
   @staticmethod
   def root_operation(n, value):
@@ -64,12 +99,21 @@ class MathFunctions:
   ##
   # @brief Invertion
   #
+  # @param num Int or float
+  # @return Negation of num
+  #
   @staticmethod
   def invert_operation(num):
     return -num
 
   ##
   # @brief Factorial
+  #
+  # @warning
+  # num must be natural number
+  #
+  # @param num Int
+  # @return Factorial of num
   #
   @staticmethod
   def factorial_operation(num):
@@ -90,6 +134,12 @@ class MathFunctions:
   ##
   # @brief Natural logarithm
   #
+  # @warning
+  # num must be positive
+  #
+  # @param num Int or float
+  # @return Natural logarithm of num
+  #
   @staticmethod
   def natural_log_operation(num):
     if num <= 0:
@@ -99,6 +149,9 @@ class MathFunctions:
 
   ##
   # @brief Absolute value
+  #
+  # @param num Int or float
+  # @return Absolute value of num
   #
   @staticmethod
   def abs_operation(num):

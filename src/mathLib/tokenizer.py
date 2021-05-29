@@ -30,8 +30,10 @@ class Tokenizer:
   # Initialize iterator and load first character
   #
   def __init__(self, text_input:str):
+    ##Iterator for iterating over text input
     self.text_iterator = Iterator(text_input)
 
+    ## Store for current character
     self.current_character = None
     self.move_forward()
 

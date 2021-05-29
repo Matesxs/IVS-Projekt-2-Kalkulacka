@@ -9,6 +9,8 @@ class Iterator:
   ##
   # @brief Init input data and set index to start
   #
+  # @param input_data Any iteratable data
+  #
   def __init__(self, input_data):
     self.__input_data = input_data
     self.__index = 0

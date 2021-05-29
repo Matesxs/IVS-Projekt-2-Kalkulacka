@@ -1,6 +1,8 @@
 ##
 # @package entry_point
 #
+# Hold function to execute end to end mathematical interpretation of text
+#
 
 from .tokenizer import Tokenizer
 from .prsr import Parser

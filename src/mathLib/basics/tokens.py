@@ -9,15 +9,35 @@ from enum import Enum
 # @brief Enum class for holding token type
 #
 class TokenType(Enum):
+      
+  ## Represents any numeric value
   NUMBER    =   0
+
+  ## Represents symbol +
   PLUS      =   1
+
+  ## Represents symbol -
   MINUS     =   2
+
+  ## Represents symbol *
   MULTIPLY  =   3
+
+  ## Represents symbol /
   DIVIDE    =   4
+
+  ## Represents symbol ^
   POW       =   5
-  ROOT      =   6 # "√"
+
+  ## Represents symbol √
+  ROOT      =   6
+
+  ## Represents symbol (
   LPAREN    =   7
+
+  ## Represents symbol )
   RPAREN    =   8
+
+  ## Represents token used by its name
   KEYWORD   =   9
 
 ##
