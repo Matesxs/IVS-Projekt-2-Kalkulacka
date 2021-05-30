@@ -111,6 +111,8 @@ class MathFunctions:
   #
   # @warning
   # num must be natural number
+  # @warning
+  # num can not be over 50000
   #
   # @param num Int
   # @return Factorial of num
@@ -122,6 +124,8 @@ class MathFunctions:
       raise RuntimeError("Factorial is not defined for floating point numbers")
     elif num < 0:
       raise RuntimeError("Factorial is not defined for negative numbers")
+    elif num > 50000:
+      raise RuntimeError("Factorial is not defined for too large numbers")
     elif num == 0:
       return 1
     #else:
